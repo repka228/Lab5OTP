@@ -108,7 +108,6 @@
             Controls.Add(dataGridViewCompetitionsAndParticipants);
             Name = "FormCompetitions";
             Text = "Соревнования";
-            Load += FormCompetitions_Load_1;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewCompetitionsAndParticipants).EndInit();
             ResumeLayout(false);

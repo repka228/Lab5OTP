@@ -26,8 +26,7 @@ namespace ProjectRacing.Forms
                     MessageBox.Show(ex.Message, "Ошибка при получении данных", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-        }
-       
+        }     
         public FormHorse(IHorseRepository horseRepository, IOwnerRepository ownerRepository)
         {
             InitializeComponent();
@@ -48,8 +47,12 @@ namespace ProjectRacing.Forms
                 if(comboBoxOwner.SelectedIndex < 0) throw new Exception("Не выбран владелец");
                 if (string.IsNullOrWhiteSpace(textBoxNameOfHorse.Text)) throw new Exception("Кличка не заполнена");
                 if (comboBoxSex.SelectedIndex<0) throw new Exception("Не выбран пол");
-                if (_horseId.HasValue) _horseRepository.UpdateHorse(_horseRepository.GetHorseById(_horseId.Value));             
-                else _horseRepository.CreateHorse(CreateHorse(0));             
+                if (_horseId.HasValue)
+                {
+                    var updatedHorse = CreateHorse(_horseId.Value);
+                    _horseRepository.UpdateHorse(updatedHorse);
+                }
+                else _horseRepository.CreateHorse(CreateHorse(0));
                 Close();
             }
             catch (Exception ex)

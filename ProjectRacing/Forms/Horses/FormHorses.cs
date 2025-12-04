@@ -69,7 +69,8 @@ namespace ProjectRacing.Forms
         }
         private void LoadList() {
             dataGridViewHorses.DataSource = _horseRepository.GetHorses();
-            dataGridViewHorses.Columns["Id"].Visible = false;}
+            dataGridViewHorses.Columns["Id"].Visible = false;
+        }
         private bool TryGetIdentifierFromsSelectRow(out int id)
         {
             id = 0;

@@ -41,9 +41,13 @@ namespace ProjectRacing.Forms.MedicalExamination
         {
             try
             {
-                
-                if (_medicalExaminationId.HasValue) _medicalExaminationRepository.UpdateMedicalExamination(_medicalExaminationRepository.GetMedicalExaminationById(_medicalExaminationId.Value));              
-                else _medicalExaminationRepository.CreateMedicalExamination(CreateMedicalExamination(0));                
+
+                if (_medicalExaminationId.HasValue)
+                {
+                    var updatedmedicalExamination = CreateMedicalExamination(_medicalExaminationId.Value);
+                    _medicalExaminationRepository.UpdateMedicalExamination(updatedmedicalExamination);
+                }
+                else _medicalExaminationRepository.CreateMedicalExamination(CreateMedicalExamination(0));
                 Close();
             }
             catch (Exception ex)

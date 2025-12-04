@@ -78,7 +78,6 @@ namespace ProjectRacing
             }
 
         }
-
         private void CompleteMedicalExaminationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try

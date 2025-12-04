@@ -8,8 +8,6 @@ namespace ProjectRacing.Forms.Competitions
         private readonly IUnityContainer _container;
         private readonly ICompetitionsRepository _competitionRepository;
         private readonly IParticipantsRepository _participantsRepository;
-        private readonly IHorseRepository _horseRepository;
-        private readonly IJockeyRepository _jockeyRepository;
         private readonly DataTable _dataTable;
         public FormCompetitions(IUnityContainer container, ICompetitionsRepository competitionRepository, IParticipantsRepository participantsRepository, IHorseRepository horseRepository, IJockeyRepository jockeyRepository)
         {
@@ -17,8 +15,6 @@ namespace ProjectRacing.Forms.Competitions
             _container = container ?? throw new ArgumentNullException(nameof(container));
             _competitionRepository = competitionRepository ?? throw new ArgumentNullException(nameof(competitionRepository));
             _participantsRepository = participantsRepository ?? throw new ArgumentNullException(nameof(participantsRepository));
-            _horseRepository = horseRepository ?? throw new ArgumentNullException(nameof(horseRepository));
-            _jockeyRepository = jockeyRepository ?? throw new ArgumentNullException(nameof(jockeyRepository));
             _dataTable = new DataTable();
             _dataTable.Columns.Add("CompetitionName", typeof(string));
             _dataTable.Columns.Add("CompetitionDate", typeof(DateTime));
@@ -33,6 +29,14 @@ namespace ProjectRacing.Forms.Competitions
             dataGridViewCompetitionsAndParticipants.Columns["JockeyName"].HeaderText = "Имя жокея";
             dataGridViewCompetitionsAndParticipants.Columns["HorseName"].HeaderText = "Имя лошади";
             dataGridViewCompetitionsAndParticipants.Columns["Place"].HeaderText = "Занятое место";
+            try
+            {
+                LoadList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка при загрузке", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
@@ -46,7 +50,6 @@ namespace ProjectRacing.Forms.Competitions
                 MessageBox.Show(ex.Message, "Ошибка при добавлении", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
             if (!TryGetIdentifierFromsSelectRow(out var findId)) return;          
@@ -77,7 +80,6 @@ namespace ProjectRacing.Forms.Competitions
                 MessageBox.Show(ex.Message, "Ошибка при изменении", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void LoadList() { 
             dataGridViewCompetitionsAndParticipants.DataSource = _competitionRepository.GetCompetitionses();
             dataGridViewCompetitionsAndParticipants.Columns["HorseID"].Visible = false;
@@ -91,19 +93,10 @@ namespace ProjectRacing.Forms.Competitions
                 MessageBox.Show("Нет выбранной записи", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            id = Convert.ToInt32(dataGridViewCompetitionsAndParticipants.SelectedRows[0].Cells["CompetitionId"].Value);
+
+            var selectedRow = dataGridViewCompetitionsAndParticipants.SelectedRows[0];
+            id = Convert.ToInt32(selectedRow.Cells["IdCompetitions"].Value);
             return true;
-        }
-        private void FormCompetitions_Load_1(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadList();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка при загрузке", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
     }
 }

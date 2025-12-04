@@ -1,5 +1,7 @@
-﻿namespace ProjectRacing.Repositories;
-public interface IConnectionString
+﻿namespace ProjectRacing.Repositories
 {
-    public string ConnectionString {get; }
+    public interface IConnectionString
+    {
+        public string ConnectionString { get; }
+    }
 }

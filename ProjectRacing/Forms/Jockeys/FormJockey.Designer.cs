@@ -31,10 +31,8 @@
             textBoxNameOfJockey = new TextBox();
             numericUpDownAgeOfJockey = new NumericUpDown();
             numericUpDownRateOfJockey = new NumericUpDown();
-            textBoxAdressOfJockey = new TextBox();
             textBoxNumberOfJockey = new TextBox();
             labelNameOfJockey = new Label();
-            labelAdressOfJockey = new Label();
             labelNumberOfJockey = new Label();
             labelAgeOfJockey = new Label();
             labelRateOfJockey = new Label();
@@ -53,7 +51,7 @@
             // 
             // numericUpDownAgeOfJockey
             // 
-            numericUpDownAgeOfJockey.Location = new Point(67, 94);
+            numericUpDownAgeOfJockey.Location = new Point(67, 72);
             numericUpDownAgeOfJockey.Minimum = new decimal(new int[] { 18, 0, 0, 0 });
             numericUpDownAgeOfJockey.Name = "numericUpDownAgeOfJockey";
             numericUpDownAgeOfJockey.Size = new Size(120, 23);
@@ -63,21 +61,14 @@
             // numericUpDownRateOfJockey
             // 
             numericUpDownRateOfJockey.DecimalPlaces = 1;
-            numericUpDownRateOfJockey.Location = new Point(67, 123);
+            numericUpDownRateOfJockey.Location = new Point(67, 101);
             numericUpDownRateOfJockey.Name = "numericUpDownRateOfJockey";
             numericUpDownRateOfJockey.Size = new Size(120, 23);
             numericUpDownRateOfJockey.TabIndex = 2;
             // 
-            // textBoxAdressOfJockey
-            // 
-            textBoxAdressOfJockey.Location = new Point(67, 36);
-            textBoxAdressOfJockey.Name = "textBoxAdressOfJockey";
-            textBoxAdressOfJockey.Size = new Size(100, 23);
-            textBoxAdressOfJockey.TabIndex = 3;
-            // 
             // textBoxNumberOfJockey
             // 
-            textBoxNumberOfJockey.Location = new Point(67, 65);
+            textBoxNumberOfJockey.Location = new Point(67, 43);
             textBoxNumberOfJockey.Name = "textBoxNumberOfJockey";
             textBoxNumberOfJockey.Size = new Size(100, 23);
             textBoxNumberOfJockey.TabIndex = 4;
@@ -91,19 +82,10 @@
             labelNameOfJockey.TabIndex = 5;
             labelNameOfJockey.Text = "Имя";
             // 
-            // labelAdressOfJockey
-            // 
-            labelAdressOfJockey.AutoSize = true;
-            labelAdressOfJockey.Location = new Point(12, 39);
-            labelAdressOfJockey.Name = "labelAdressOfJockey";
-            labelAdressOfJockey.Size = new Size(40, 15);
-            labelAdressOfJockey.TabIndex = 6;
-            labelAdressOfJockey.Text = "Адрес";
-            // 
             // labelNumberOfJockey
             // 
             labelNumberOfJockey.AutoSize = true;
-            labelNumberOfJockey.Location = new Point(12, 68);
+            labelNumberOfJockey.Location = new Point(12, 46);
             labelNumberOfJockey.Name = "labelNumberOfJockey";
             labelNumberOfJockey.Size = new Size(56, 15);
             labelNumberOfJockey.TabIndex = 7;
@@ -112,7 +94,7 @@
             // labelAgeOfJockey
             // 
             labelAgeOfJockey.AutoSize = true;
-            labelAgeOfJockey.Location = new Point(12, 96);
+            labelAgeOfJockey.Location = new Point(12, 74);
             labelAgeOfJockey.Name = "labelAgeOfJockey";
             labelAgeOfJockey.Size = new Size(50, 15);
             labelAgeOfJockey.TabIndex = 8;
@@ -121,7 +103,7 @@
             // labelRateOfJockey
             // 
             labelRateOfJockey.AutoSize = true;
-            labelRateOfJockey.Location = new Point(12, 125);
+            labelRateOfJockey.Location = new Point(12, 103);
             labelRateOfJockey.Name = "labelRateOfJockey";
             labelRateOfJockey.Size = new Size(51, 15);
             labelRateOfJockey.TabIndex = 9;
@@ -129,7 +111,7 @@
             // 
             // buttonExit
             // 
-            buttonExit.Location = new Point(144, 167);
+            buttonExit.Location = new Point(144, 145);
             buttonExit.Name = "buttonExit";
             buttonExit.Size = new Size(75, 23);
             buttonExit.TabIndex = 11;
@@ -139,7 +121,7 @@
             // 
             // buttonSave
             // 
-            buttonSave.Location = new Point(12, 167);
+            buttonSave.Location = new Point(12, 145);
             buttonSave.Name = "buttonSave";
             buttonSave.Size = new Size(75, 23);
             buttonSave.TabIndex = 10;
@@ -151,16 +133,14 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(239, 217);
+            ClientSize = new Size(239, 187);
             Controls.Add(buttonExit);
             Controls.Add(buttonSave);
             Controls.Add(labelRateOfJockey);
             Controls.Add(labelAgeOfJockey);
             Controls.Add(labelNumberOfJockey);
-            Controls.Add(labelAdressOfJockey);
             Controls.Add(labelNameOfJockey);
             Controls.Add(textBoxNumberOfJockey);
-            Controls.Add(textBoxAdressOfJockey);
             Controls.Add(numericUpDownRateOfJockey);
             Controls.Add(numericUpDownAgeOfJockey);
             Controls.Add(textBoxNameOfJockey);
@@ -177,10 +157,8 @@
         private TextBox textBoxNameOfJockey;
         private NumericUpDown numericUpDownAgeOfJockey;
         private NumericUpDown numericUpDownRateOfJockey;
-        private TextBox textBoxAdressOfJockey;
         private TextBox textBoxNumberOfJockey;
         private Label labelNameOfJockey;
-        private Label labelAdressOfJockey;
         private Label labelNumberOfJockey;
         private Label labelAgeOfJockey;
         private Label labelRateOfJockey;

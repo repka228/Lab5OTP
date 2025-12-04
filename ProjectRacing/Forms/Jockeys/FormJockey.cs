@@ -32,12 +32,15 @@ namespace ProjectRacing.Forms
         private void ButtonSave_Click(object sender, EventArgs e)
         {
             try
-            {
-                if (string.IsNullOrWhiteSpace(textBoxAdressOfJockey.Text)) throw new Exception("Адрес жокея не заполнен");
+            {     
                 if (string.IsNullOrWhiteSpace(textBoxNameOfJockey.Text)) throw new Exception("Имя не заполнено");
                 if (string.IsNullOrWhiteSpace(textBoxNumberOfJockey.Text)) throw new Exception("Номер не заполнен");
-                if (_jockeyId.HasValue) _jockeyRepository.UpdateJockey(_jockeyRepository.GetJockeyById(_jockeyId.Value));               
-                else _jockeyRepository.CreateJockey(CreateJockey(0));               
+                if (_jockeyId.HasValue)
+                {
+                    var updatedJockey = CreateJockey(_jockeyId.Value);
+                    _jockeyRepository.UpdateJockey(updatedJockey);
+                }
+                else _jockeyRepository.CreateJockey(CreateJockey(0));
                 Close();
             }
             catch (Exception ex)

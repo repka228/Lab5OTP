@@ -1,7 +1,9 @@
-﻿namespace ProjectRacing.Entities.Enums;
-public enum HealthStatus
+﻿namespace ProjectRacing.Entities.Enums
 {
-    Completely = 0,
-    Partially = 1,
-    Unwell = 2
+    public enum HealthStatus
+    {
+        Completely = 0,
+        Partially = 1,
+        Unwell = 2
+    }
 }

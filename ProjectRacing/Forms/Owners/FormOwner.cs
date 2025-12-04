@@ -36,8 +36,12 @@ namespace ProjectRacing.Forms.Owners
                 if (string.IsNullOrWhiteSpace(textBoxAdressOfOwner.Text)) throw new Exception("Адрес владельца не заполнен");
                 if (string.IsNullOrWhiteSpace(textBoxNameOfOwner.Text)) throw new Exception("Имя не заполнено");
                 if (string.IsNullOrWhiteSpace(textBoxNumberOfOwner.Text)) throw new Exception("Номер владельца не заполнен");
-                if (_ownerId.HasValue) _ownerRepository.UpdateOwner(_ownerRepository.GetOwnerById(_ownerId.Value));               
-                else _ownerRepository.CreateOwner(CreateOwner(0));            
+                if (_ownerId.HasValue)
+                {
+                    var updatedOwner = CreateOwner(_ownerId.Value);
+                    _ownerRepository.UpdateOwner(updatedOwner);
+                }
+                else _ownerRepository.CreateOwner(CreateOwner(0));
                 Close();
             }
             catch (Exception ex)

@@ -21,7 +21,7 @@ namespace ProjectRacing.Forms
                     textBoxNameOfCompetition.Text = competition.Name;
                     dateTimePickerDateOfCompetition.Text = competition.DateOfCompetitions.ToString();
                     _competitionId = value;
-                    var participants = _participantsRepository.GetParticipantsById(value);
+                    var participants = _participantsRepository.GetParticipantsByCompetitionId(value);
                     if (participants == null) throw new InvalidDataException(nameof(participants));                 
                     comboBoxJockeys.DataSource = _jockeyRepository.GetJockeys();
                     comboBoxHorses.DataSource = _horseRepository.GetHorses();
@@ -55,11 +55,15 @@ namespace ProjectRacing.Forms
                 if (string.IsNullOrWhiteSpace(textBoxAdressOfCompetition.Text)) throw new Exception("Место соревнований не заполнено");
                 if (_competitionId.HasValue)
                 {
-                    _competitionRepository.UpdateCompetitions(_competitionRepository.GetCompetitionById(_competitionId.Value));
-                    _competitionId = _competitionId.Value;
+                    var updatedCompetitions = CreateCompetition(_competitionId.Value);
+                    _competitionRepository.UpdateCompetitions(updatedCompetitions);
                 }
                 else _competitionId = _competitionRepository.CreateCompetitions(CreateCompetition(0));
-                if (_participantsId.HasValue) _participantsRepository.UpdateParticipants(_participantsRepository.GetParticipantsById(_participantsId.Value));
+                if (_participantsId.HasValue)
+                {
+                    var updatedParticipants = CreateParticipants(_participantsId.Value);
+                    _participantsRepository.UpdateParticipants(updatedParticipants);
+                }
                 else _participantsRepository.CreateParticipants(CreateParticipants(0));
                 Close();
             }
