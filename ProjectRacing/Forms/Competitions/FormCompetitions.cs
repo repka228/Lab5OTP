@@ -3,13 +3,35 @@ using System.Data;
 using Unity;
 namespace ProjectRacing.Forms.Competitions
 {
+    /// <summary>
+    /// Форма соревнований
+    /// </summary>
     public partial class FormCompetitions : Form
     {
+        /// <summary>
+        /// Контейнер форм соревнования
+        /// </summary>
         private readonly IUnityContainer _container;
+        /// <summary>
+        /// Репозиторий соревнований
+        /// </summary>
         private readonly ICompetitionsRepository _competitionRepository;
+        /// <summary>
+        /// Репозиторий участников
+        /// </summary>
         private readonly IParticipantsRepository _participantsRepository;
+        /// <summary>
+        /// Сводная таблицы всех данных
+        /// </summary>
         private readonly DataTable _dataTable;
-        public FormCompetitions(IUnityContainer container, ICompetitionsRepository competitionRepository, IParticipantsRepository participantsRepository, IHorseRepository horseRepository, IJockeyRepository jockeyRepository)
+        /// <summary>
+        /// Конструктор формы соревнований
+        /// </summary>
+        /// <param name="container">Контейнер форм соревнования</param>
+        /// <param name="competitionRepository">Репозиторий соревнований</param>
+        /// <param name="participantsRepository">Репозиторий участников</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        public FormCompetitions(IUnityContainer container, ICompetitionsRepository competitionRepository, IParticipantsRepository participantsRepository)
         {
             InitializeComponent();
             _container = container ?? throw new ArgumentNullException(nameof(container));
@@ -38,6 +60,11 @@ namespace ProjectRacing.Forms.Competitions
                 MessageBox.Show(ex.Message, "Ошибка при загрузке", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        /// <summary>
+        /// Добавление соревнования
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
             try
@@ -50,6 +77,11 @@ namespace ProjectRacing.Forms.Competitions
                 MessageBox.Show(ex.Message, "Ошибка при добавлении", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        /// <summary>
+        /// Удаление соревнования
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
             if (!TryGetIdentifierFromsSelectRow(out var findId)) return;          
@@ -65,6 +97,11 @@ namespace ProjectRacing.Forms.Competitions
                 MessageBox.Show(ex.Message, "Ошибка при удалении", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        /// <summary>
+        /// Обновление соревнования
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonUpdate_Click(object sender, EventArgs e)
         {
             if (!TryGetIdentifierFromsSelectRow(out var findId)) return;         
@@ -80,11 +117,19 @@ namespace ProjectRacing.Forms.Competitions
                 MessageBox.Show(ex.Message, "Ошибка при изменении", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        /// <summary>
+        /// Загрузка соревнований
+        /// </summary>
         private void LoadList() { 
             dataGridViewCompetitionsAndParticipants.DataSource = _competitionRepository.GetCompetitionses();
             dataGridViewCompetitionsAndParticipants.Columns["HorseID"].Visible = false;
             dataGridViewCompetitionsAndParticipants.Columns["IdCompetitions"].Visible = false;
         }
+        /// <summary>
+        /// Получение ID соревнований из таблицы
+        /// </summary>
+        /// <param name="id">ID выбранной строки</param>
+        /// <returns></returns>
         private bool TryGetIdentifierFromsSelectRow(out int id)
         {
             id = 0;

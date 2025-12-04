@@ -3,18 +3,30 @@ using ProjectRacing.Repositories;
 using Unity;
 namespace ProjectRacing.Forms
 {
+    /// <summary>
+    /// Форма владельцев
+    /// </summary>
     public partial class FormOwners : Form
     {
+        /// <summary>
+        /// Контейнер формы владельца
+        /// </summary>
         private readonly IUnityContainer _container;
+        /// <summary>
+        /// Репозиторий владельца
+        /// </summary>
         private readonly IOwnerRepository _ownerRepository;
+        /// <summary>
+        /// Конструктор формы владельцев
+        /// </summary>
+        /// <param name="container">Контейнер формы владельца</param>
+        /// <param name="ownerRepository">Репозиторий владельцев</param>
+        /// <exception cref="ArgumentNullException">Нет контейнера</exception>
         public FormOwners(IUnityContainer container, IOwnerRepository ownerRepository)
         {
             InitializeComponent();
             _container = container ?? throw new ArgumentNullException(nameof(container));
             _ownerRepository = ownerRepository ?? throw new ArgumentNullException(nameof(ownerRepository));
-        }
-        private void FormOwners_Load(object sender, EventArgs e)
-        {
             try
             {
                 LoadList();
@@ -24,6 +36,11 @@ namespace ProjectRacing.Forms
                 MessageBox.Show(ex.Message, "Ошибка при загрузке", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        /// <summary>
+        /// Добавление владельца
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
             try
@@ -38,6 +55,11 @@ namespace ProjectRacing.Forms
                 }
             }
         }
+        /// <summary>
+        /// Удаление владельца
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
             if (!TryGetIdentifierFromsSelectRow(out var findId)) return;           
@@ -52,6 +74,11 @@ namespace ProjectRacing.Forms
                 MessageBox.Show(ex.Message, "Ошибка при удалении", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        /// <summary>
+        /// Обновление владельца
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonUpdate_Click(object sender, EventArgs e)
         {
             if (!TryGetIdentifierFromsSelectRow(out var findId)) return;            
@@ -67,10 +94,18 @@ namespace ProjectRacing.Forms
                 MessageBox.Show(ex.Message, "Ошибка при изменении", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        /// <summary>
+        /// Загрузка владельцев
+        /// </summary>
         private void LoadList() {
             dataGridViewOwners.DataSource = _ownerRepository.GetOwners();
             dataGridViewOwners.Columns["Id"].Visible = false;
         }
+        /// <summary>
+        /// Получения ID владельца из таблицы
+        /// </summary>
+        /// <param name="id">Id выбранной строки</param>
+        /// <returns></returns>
         private bool TryGetIdentifierFromsSelectRow(out int id)
         {
             id = 0;

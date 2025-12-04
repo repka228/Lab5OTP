@@ -5,6 +5,12 @@ using ProjectRacing.Entities;
 using Npgsql;
 namespace ProjectRacing.Repositories.Implementations
 {
+    /// <summary>
+    /// Репозиторий медицинских обследований
+    /// </summary>
+    /// <param name="connectionString">Строка подключения к БД</param>
+    /// <param name="logger">Логгер</param>
+    /// <param name="horseRepository">Репозиторий лошадей</param>
     public class MedicalExaminationRepository(IConnectionString connectionString, ILogger<MedicalExaminationRepository> logger, IHorseRepository horseRepository) : IMedicalExaminationRepository
     {
         private readonly IConnectionString _connectionString = connectionString;
@@ -45,7 +51,6 @@ namespace ProjectRacing.Repositories.Implementations
                 _logger.LogError(ex, "Ошибка при редактировании медосмотра");
                 throw;
             }
-
         }
         public void DeleteMedicalExamination(int id)
         {

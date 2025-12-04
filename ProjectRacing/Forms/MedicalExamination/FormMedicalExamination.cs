@@ -2,10 +2,22 @@
 using ProjectRacing.Repositories;
 namespace ProjectRacing.Forms.MedicalExamination
 {
+    /// <summary>
+    /// Форма медицинского обследования
+    /// </summary>
     public partial class FormMedicalExamination : Form
     {
+        /// <summary>
+        /// Репозиторий медицинских обследований
+        /// </summary>
         private readonly IMedicalExaminationRepository _medicalExaminationRepository;
+        /// <summary>
+        /// 
+        /// </summary>
         private int? _medicalExaminationId;
+        /// <summary>
+        /// 
+        /// </summary>
         public int ID
         {
             set
@@ -26,6 +38,12 @@ namespace ProjectRacing.Forms.MedicalExamination
                 }
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="horseRepository"></param>
+        /// <param name="medicalExamination"></param>
+        /// <exception cref="ArgumentNullException"></exception>
         public FormMedicalExamination(IHorseRepository horseRepository, IMedicalExaminationRepository medicalExamination)
         {
             InitializeComponent();
@@ -37,6 +55,11 @@ namespace ProjectRacing.Forms.MedicalExamination
             foreach (var value in healthStatusValues) comboBoxResult.Items.Add(value);
             comboBoxResult.SelectedIndex = 0;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonSave_Click(object sender, EventArgs e)
         {
             try
@@ -55,7 +78,17 @@ namespace ProjectRacing.Forms.MedicalExamination
                 MessageBox.Show(ex.Message, "Ошибка при сохранении", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonExit_Click(object sender, EventArgs e) => Close();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private Entities.MedicalExamination CreateMedicalExamination(int id) => Entities.MedicalExamination.CreateEntity(id,dateTimePickerMedicalExamination.Value,(HealthStatus)comboBoxResult.SelectedIndex!, (int)comboBoxHorses.SelectedValue!);
     }
 }

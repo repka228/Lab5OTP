@@ -2,28 +2,45 @@
 using Unity;
 namespace ProjectRacing.Forms
 {
+    /// <summary>
+    /// Форма лошадей
+    /// </summary>
     public partial class FormHorses : Form
     {
+        /// <summary>
+        /// Контейнер формы лошади
+        /// </summary>
         private readonly IUnityContainer _container;
+        /// <summary>
+        /// Репозиторий лошадей
+        /// </summary>
         private readonly IHorseRepository _horseRepository;
-        private readonly IOwnerRepository _ownerRepository;
-        public FormHorses(IUnityContainer container, IHorseRepository horseRepository, IOwnerRepository ownerRepository)
+        /// <summary>
+        /// Конструктор формы лошадей
+        /// </summary>
+        /// <param name="container">Контейнер формы лошади</param>
+        /// <param name="horseRepository">Репозиторий лошадей</param>
+        /// <param name="ownerRepository">Репозиторий владельцев</param>
+        /// <exception cref="ArgumentNullException">Нет репозитория</exception>
+        public FormHorses(IUnityContainer container, IHorseRepository horseRepository)
         {
             InitializeComponent();
             _container = container ?? throw new ArgumentNullException(nameof(container));
             _horseRepository = horseRepository ?? throw new ArgumentNullException(nameof(horseRepository));
-            _ownerRepository = ownerRepository;
-        }
-        private void FormHorses_Load(object sender, EventArgs e)
-        {
             try
             {
                 LoadList();
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 MessageBox.Show(ex.Message, "Ошибка при загрузке", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        /// <summary>
+        /// Добавить лошадь
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
             try
@@ -38,6 +55,11 @@ namespace ProjectRacing.Forms
                 }
             }
         }
+        /// <summary>
+        /// Удалить лошадь
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonDelete_Click(object sender, EventArgs e)
         {
             if (!TryGetIdentifierFromsSelectRow(out var findId)) return;          
@@ -52,6 +74,11 @@ namespace ProjectRacing.Forms
                 MessageBox.Show(ex.Message, "Ошибка при удалении", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        /// <summary>
+        /// Обновить лошадь
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonUpdate_Click(object sender, EventArgs e)
         {
             if (!TryGetIdentifierFromsSelectRow(out var findId)) return;      
@@ -67,10 +94,18 @@ namespace ProjectRacing.Forms
                 MessageBox.Show(ex.Message, "Ошибка при изменении", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        /// <summary>
+        /// Загрузить лошади
+        /// </summary>
         private void LoadList() {
             dataGridViewHorses.DataSource = _horseRepository.GetHorses();
             dataGridViewHorses.Columns["Id"].Visible = false;
         }
+        /// <summary>
+        /// Получения ID лошади из таблицы
+        /// </summary>
+        /// <param name="id">ID выбранной строки</param>
+        /// <returns></returns>
         private bool TryGetIdentifierFromsSelectRow(out int id)
         {
             id = 0;

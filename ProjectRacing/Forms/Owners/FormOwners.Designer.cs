@@ -108,7 +108,6 @@
             Controls.Add(dataGridViewOwners);
             Name = "FormOwners";
             Text = "Владельцы";
-            Load += FormOwners_Load;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewOwners).EndInit();
             ResumeLayout(false);

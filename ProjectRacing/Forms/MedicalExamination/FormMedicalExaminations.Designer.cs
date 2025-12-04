@@ -108,7 +108,6 @@
             Controls.Add(dataGridViewHorses);
             Name = "FormMedicalExaminations";
             Text = "Медицинские обследования";
-            Load += FormMedicalExaminations_Load;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewHorses).EndInit();
             ResumeLayout(false);

@@ -3,10 +3,22 @@ using ProjectRacing.Entities.Enums;
 using ProjectRacing.Repositories;
 namespace ProjectRacing.Forms
 {
+    /// <summary>
+    /// Форма лошади
+    /// </summary>
     public partial class FormHorse : Form
     {
+        /// <summary>
+        /// Репозиторий лошадей
+        /// </summary>
         private readonly IHorseRepository _horseRepository;
+        /// <summary>
+        /// ID лошади
+        /// </summary>
         private int? _horseId;
+        /// <summary>
+        /// Получение ID переданной лошади
+        /// </summary>
         public int ID
         {
             set
@@ -27,6 +39,12 @@ namespace ProjectRacing.Forms
                 }
             }
         }     
+        /// <summary>
+        /// Конструктор формы лошадей
+        /// </summary>
+        /// <param name="horseRepository">Репозиторий лошадей</param>
+        /// <param name="ownerRepository">Репозиторий владельцев</param>
+        /// <exception cref="ArgumentNullException">Нет репозитория</exception>
         public FormHorse(IHorseRepository horseRepository, IOwnerRepository ownerRepository)
         {
             InitializeComponent();
@@ -40,6 +58,11 @@ namespace ProjectRacing.Forms
             foreach (var gender in genders) comboBoxSex.Items.Add(gender);           
             comboBoxSex.SelectedIndex = 0;
         }
+        /// <summary>
+        /// Сохранение лошади
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonSave_Click(object sender, EventArgs e)
         {
             try
@@ -60,7 +83,17 @@ namespace ProjectRacing.Forms
                 MessageBox.Show(ex.Message, "Ошибка при сохранении", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        /// <summary>
+        /// Закрытие формы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonExit_Click(object sender, EventArgs e) => Close();
+        /// <summary>
+        /// Создание лошади
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private Horse CreateHorse(int id)=> Horse.CreateEntity(id, textBoxNameOfHorse.Text, (Gender)comboBoxSex.SelectedIndex!, dateTimePickerDateOfBirthday.Value, (int)comboBoxOwner.SelectedValue!);
     }
 }

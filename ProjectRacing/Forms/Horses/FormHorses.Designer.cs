@@ -109,7 +109,6 @@
             Name = "FormHorses";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Лошади";
-            Load += FormHorses_Load;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewHorses).EndInit();
             ResumeLayout(false);

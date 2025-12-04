@@ -5,6 +5,11 @@ using ProjectRacing.Entities;
 using Npgsql;
 namespace ProjectRacing.Repositories.Implementations
 {
+    /// <summary>
+    /// Репозиторий соревнований
+    /// </summary>
+    /// <param name="connectionString">Строка подключения к БД</param>
+    /// <param name="logger">Логгер</param>
     public class CompetitionsRepository(IConnectionString connectionString, ILogger<CompetitionsRepository> logger) : ICompetitionsRepository
     {
         private readonly IConnectionString _connectionString = connectionString;

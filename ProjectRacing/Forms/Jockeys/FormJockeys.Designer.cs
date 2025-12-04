@@ -108,7 +108,6 @@
             Controls.Add(dataGridViewJockeys);
             Name = "FormJockeys";
             Text = "Жокеи";
-            Load += FormJockeys_Load;
             panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewJockeys).EndInit();
             ResumeLayout(false);

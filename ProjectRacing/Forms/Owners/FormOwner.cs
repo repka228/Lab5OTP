@@ -1,10 +1,22 @@
 ﻿using ProjectRacing.Repositories;
 namespace ProjectRacing.Forms.Owners
 {
+    /// <summary>
+    /// Форма владельца
+    /// </summary>
     public partial class FormOwner : Form
     {
+        /// <summary>
+        /// Репозиторий владельцев
+        /// </summary>
         private readonly IOwnerRepository _ownerRepository;
+        /// <summary>
+        /// Id владельца
+        /// </summary>
         private int? _ownerId;
+        /// <summary>
+        /// Id переданного владельца
+        /// </summary>
         public int ID
         {
             set
@@ -24,11 +36,21 @@ namespace ProjectRacing.Forms.Owners
                 }
             }
         }
+        /// <summary>
+        /// Конструктор формы владельца
+        /// </summary>
+        /// <param name="ownerRepository">Репозиторий владельца</param>
+        /// <exception cref="ArgumentNullException">Нет репозитория владельца</exception>
         public FormOwner(IOwnerRepository ownerRepository)
         {
             InitializeComponent();
             _ownerRepository = ownerRepository ?? throw new ArgumentNullException(nameof(ownerRepository));
         }
+        /// <summary>
+        /// Сохранение владельца
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonSave_Click(object sender, EventArgs e)
         {
             try
@@ -49,7 +71,17 @@ namespace ProjectRacing.Forms.Owners
                 MessageBox.Show(ex.Message, "Ошибка при сохранении", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        /// <summary>
+        /// Выход из формы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonExit_Click(object sender, EventArgs e) => Close();
+        /// <summary>
+        /// Создание владельца
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private Entities.Owner CreateOwner(int id) => Entities.Owner.CreateEntity(id, textBoxNameOfOwner.Text, textBoxNumberOfOwner.Text, textBoxAdressOfOwner.Text);
     }
 }
